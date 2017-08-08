@@ -1,38 +1,57 @@
-Role Name
-=========
+adriagalin.neo4j
+================
 
-A brief description of the role goes here.
+[![Build Status](https://travis-ci.org/adriagalin/ansible.neo4j.svg?branch=master)](https://travis-ci.org/adriagalin/ansible.neo4j) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-neo4j-blue.svg)](https://galaxy.ansible.com/list#/roles/NUM)
+
+An ansible role for set up a Neo4j graph database server.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Tested on:
+
+-	Ubuntu 14.04 LTS
+-	Ubuntu 16.04 LTS
+
+Should work with:
+
+-	All Ubuntu
+-	All Debian
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Check defaults/main.yml file to review all vars.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
+```yaml
+    - hosts: all
       roles:
-         - { role: username.rolename, x: 42 }
+        - { role: adriagalin.neo4j }
 
 License
 -------
 
-BSD
+GPLv3 License.
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+[Adrià Galín](https://www.adriagalin.com/)
+
+Inspiration
+-----------
+
+During development, some roles in Ansible Galaxy/Github also inspired me:
+
+-	[julienroubieu](https://github.com/julienroubieu/ansible-neo4j)
+-	and many others.
+
+thank you.

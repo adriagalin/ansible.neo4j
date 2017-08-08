@@ -1,0 +1,9 @@
+---
+# tasks file for adriagalin.neo4j
+
+- name: neo4j | install java package
+  apt:
+    name: "{{ ag_neo4j_java_package }}"
+    state: present
+    install_recommends: yes
+    update_cache: yes

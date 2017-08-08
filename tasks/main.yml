@@ -1,2 +1,13 @@
 ---
 # tasks file for adriagalin.neo4j
+
+- include: java.yml
+  when: ag_neo4j_java_install
+  tags: [ java ]
+
+- include: neo4j.yml
+  tags: [ neo4j ]
+
+- include: plugins.yml
+  when: ag_neo4j_plugins|length > 0
+  tags: [ neo4j, neo4j-plugins ]

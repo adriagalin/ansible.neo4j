@@ -1,0 +1,40 @@
+---
+# tasks file for adriagalin.neo4j
+
+- name: neo4j | add neo4j repository apt-key
+  apt_key:
+    url: "{{ ag_neo4j_repository_key }}"
+    state: present
+
+- name: neo4j | add neo4j repository
+  apt_repository:
+    repo: "{{ ag_neo4j_repository }}"
+    state: present
+    update_cache: yes
+
+- name: neo4j | install the neo4j package
+  apt:
+    name: neo4j={{ ag_neo4j_package_version }}
+    state: present
+    install_recommends: yes
+    update_cache: yes
+
+- name: neo4j | set user
+  user: name={{ ag_neo4j_owner }} state=present
+
+- name: neo4j | configure neo4j
+  template:
+    src: "{{ ag_neo4j_template_path }}"
+    dest: "{{ ag_neo4j_configuration_destination }}"
+    owner: "{{ ag_neo4j_owner }}"
+    group: "{{ ag_neo4j_group }}"
+    mode: "{{ ag_neo4j_mode }}"
+  notify: neo4j | restart
+
+- include: limits.yml
+
+- name: neo4j | ensure neo4j is enabled and started
+  service:
+    name: neo4j
+    enabled: yes
+    state: started

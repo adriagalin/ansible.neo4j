@@ -1,2 +1,134 @@
 ---
 # defaults file for adriagalin.neo4j
+ag_neo4j_package: neo4j
+ag_neo4j_package_version: 3.2.3
+ag_neo4j_repository_key: 'https://debian.neo4j.org/neotechnology.gpg.key'
+ag_neo4j_repository: 'deb http://debian.neo4j.org/repo stable/'
+
+ag_neo4j_owner: neo4j
+ag_neo4j_group: adm
+ag_neo4j_mode: 0644
+
+ag_neo4j_java_install: true
+ag_neo4j_java_package: openjdk-8-jdk-headless
+
+# Limits
+ag_neo4j_update_limits: true
+ag_neo4j_nofile_value: 40000
+
+# Neo4j plugins list
+ag_neo4j_plugins: []
+
+ag_neo4j_ansible_managed: "# Ansible managed configuration. Don't touch manually."
+#*****************************************************************
+# Neo4j configuration
+#*****************************************************************
+ag_neo4j_template_path: etc/neo4j/neo4j.conf.j2
+ag_neo4j_configuration_destination: /etc/neo4j/neo4j.conf
+
+ag_neo4j_dbms_active_database: 'graph.db'
+
+ag_neo4j_dbms_directories_data: '/var/lib/neo4j/data'
+ag_neo4j_dbms_directories_plugins: '/var/lib/neo4j/plugins'
+ag_neo4j_dbms_directories_certificates: '/var/lib/neo4j/certificates'
+ag_neo4j_dbms_directories_logs: '/var/log/neo4j'
+ag_neo4j_dbms_directories_lib: '/usr/share/neo4j/lib'
+ag_neo4j_dbms_directories_run: '/var/run/neo4j'
+ag_neo4j_dbms_directories_import: '/var/lib/neo4j/import'
+
+# ag_neo4j_dbms_security_auth_enabled: false
+# ag_neo4j_dbms_allow_format_migration: true
+
+# ag_neo4j_dbms_memory_heap_initial_size: '512m'
+# ag_neo4j_dbms_memory_heap_max_size: '512m'
+# ag_neo4j_dbms_memory_pagecache_size: 10g
+
+#*****************************************************************
+# Network connector configuration
+#*****************************************************************
+# ag_neo4j_dbms_connectors_default_listen_address: 0.0.0.0
+# ag_neo4j_dbms_connectors_default_advertised_address: localhost
+
+ag_neo4j_dbms_connector_bolt_enabled: true
+ag_neo4j_dbms_connector_bolt_tls_level: 'OPTIONAL'
+ag_neo4j_dbms_connector_bolt_listen_address: ':7687'
+
+ag_neo4j_dbms_connector_http_enabled: true
+#ag_neo4j_dbms_connector_http_listen_address: ':7474'
+
+ag_neo4j_dbms_connector_https_enabled: true
+# ag_neo4j_dbms_connector_https_listen_address: ':7473'
+
+# ag_neo4j_dbms_threads_worker_count:
+
+#*****************************************************************
+# SSL system configuration
+#*****************************************************************
+# ag_neo4j_bolt_ssl_policy: 'legacy'
+# ag_neo4j_https_ssl_policy: 'legacy'
+
+#*****************************************************************
+# SSL policy configuration
+#*****************************************************************
+# ag_neo4j_dbms_ssl_policy_default_base_directory: 'certificates/default'
+# ag_neo4j_dbms_ssl_policy_default_allow_key_generation: false
+# ag_neo4j_dbms_ssl_policy_default_trust_all: false
+# ag_neo4j_dbms_ssl_policy_default_private_key: ''
+# ag_neo4j_dbms_ssl_policy_default_public_key: ''
+# ag_neo4j_dbms_ssl_policy_default_trusted_dir: ''
+# ag_neo4j_dbms_ssl_policy_default_client_auth: 'require'
+# ag_neo4j_dbms_ssl_policy_default_tls_versions: ''
+# ag_neo4j_dbms_ssl_policy_default_ciphers: ''
+
+#*****************************************************************
+# Logging configuration
+#*****************************************************************
+# ag_neo4j_dbms_logs_http_enabled: true
+# ag_neo4j_dbms_logs_http_rotation_keep_number: 5
+# ag_neo4j_dbms_logs_http_rotation_size: '20m'
+# ag_neo4j_dbms_logs_gc_enabled: true
+# ag_neo4j_dbms_logs_gc_options: '-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCApplicationStoppedTime -XX:+PrintPromotionFailure -XX:+PrintTenuringDistribution'
+# ag_neo4j_dbms_logs_gc_rotation_keep_number: 5
+# ag_neo4j_dbms_logs_gc_rotation_size: '20m'
+# ag_neo4j_dbms_logs_debug_rotation_size: '20m'
+# ag_neo4j_dbms_logs_debug_rotation_keep_number: 7
+
+#*****************************************************************
+# Miscellaneous configuration
+#*****************************************************************
+# ag_neo4j_cypher_default_language_version: '3.0'
+# ag_neo4j_dbms_security_allow_csv_import_from_file_urls: true
+ag_neo4j_dbms_tx_log_rotation_retention_policy: '1 days'
+# ag_neo4j_dbms_shell_enabled: true
+# ag_neo4j_dbms_shell_host: '127.0.0.1'
+# ag_neo4j_dbms_shell_port: 1337
+# ag_neo4j_dbms_read_only: false
+# ag_neo4j_dbms_unmanaged_extension_classes: 'org.neo4j.examples.server.unmanaged=/examples/unmanaged'
+
+#********************************************************************
+# JVM Parameters
+#********************************************************************
+ag_neo4j_dbms_jvm_additional:
+  - '-XX:+UseG1GC -XX:-OmitStackTraceInFastThrow'
+  - '-XX:+AlwaysPreTouch -XX:+UnlockExperimentalVMOptions'
+  - '-XX:+TrustFinalNonStaticFields'
+  - '-XX:+DisableExplicitGC'
+  # - '-Djava.rmi.server.hostname=$THE_NEO4J_SERVER_HOSTNAME'
+  - '-Djdk.tls.ephemeralDHKeySize=2048'
+ag_neo4j_dbms_jvm_additional_remote: []
+  # - '-Dcom.sun.management.jmxremote.port=3637'
+  # - '-Dcom.sun.management.jmxremote.authenticate=true'
+  # - '-Dcom.sun.management.jmxremote.ssl=false'
+  # - '-Dcom.sun.management.jmxremote.password.file=/absolute/path/to/conf/jmx.password'
+  # - '-Dcom.sun.management.jmxremote.access.file=/absolute/path/to/conf/jmx.access'
+
+#********************************************************************
+# Wrapper Windows NT/2000/XP Service Properties
+#********************************************************************
+ag_neo4j_dbms_windows_service_name: 'neo4j'
+
+#********************************************************************
+# Other Neo4j system properties
+#********************************************************************
+ag_neo4j_dbms_jvm_additional_others:
+  - '-Dunsupported.dbms.udc.source=debian'

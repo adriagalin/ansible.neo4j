@@ -1,2 +1,7 @@
 ---
 # handlers file for adriagalin.neo4j
+
+- name: neo4j | restart
+  service:
+    name: neo4j
+    state: restarted

@@ -1,0 +1,14 @@
+---
+# tasks file for adriagalin.neo4j
+
+- name: neo4j | set limits (nofile soft and hard limit)
+  lineinfile:
+    dest: /etc/security/limits.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    insertbefore: "# End of file"
+    state: present
+  with_items:
+    - { regexp: '^{{ ag_neo4j_owner }}\s+soft', line: '{{ ag_neo4j_owner }}   soft    nofile  {{ ag_neo4j_nofile_value }}' }
+    - { regexp: '^{{ ag_neo4j_owner }}\s+hard', line: '{{ ag_neo4j_owner }}   hard    nofile  {{ ag_neo4j_nofile_value }}' }
+  when: ag_neo4j_update_limits
