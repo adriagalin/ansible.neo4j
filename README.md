@@ -28,6 +28,8 @@ Example Playbook
 
 ```yaml
     - hosts: all
+      vars:
+        ag_neo4j_java_package: openjdk-8-jdk-headless
       roles:
         - { role: adriagalin.neo4j }
 
