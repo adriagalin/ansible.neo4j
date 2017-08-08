@@ -33,6 +33,12 @@ Example Playbook
       roles:
         - { role: adriagalin.neo4j }
 
+ToDo
+----
+
+- Add HA config.
+- Add server test validation.
+
 License
 -------
 
